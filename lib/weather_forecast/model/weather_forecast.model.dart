@@ -5,6 +5,8 @@ class WeatherForecastModel {
   int? timezoneOffset;
   Current? current;
   List<Daily>? daily;
+  String? city;
+  String? country;
 
   WeatherForecastModel(
       {this.lat,
@@ -12,9 +14,14 @@ class WeatherForecastModel {
       this.timezone,
       this.timezoneOffset,
       this.current,
-      this.daily});
+      this.daily,
+      this.city,
+      this.country});
 
-  WeatherForecastModel.fromJson(Map<String, dynamic> json) {
+  WeatherForecastModel.fromJson(
+      Map<String, dynamic> json, String? city, String? country) {
+    this.city = city;
+    this.country = country;
     lat = json['lat'];
     lon = json['lon'];
     timezone = json['timezone'];
@@ -60,7 +67,7 @@ class Current {
   num? windSpeed;
   int? windDeg;
   num? windGust;
-  List<Weather>? weather;
+  late List<Weather> weather;
 
   Current(
       {this.dt,
@@ -77,7 +84,7 @@ class Current {
       this.windSpeed,
       this.windDeg,
       this.windGust,
-      this.weather});
+      required this.weather});
 
   Current.fromJson(Map<String, dynamic> json) {
     dt = json['dt'];
@@ -94,12 +101,10 @@ class Current {
     windSpeed = json['wind_speed'];
     windDeg = json['wind_deg'];
     windGust = json['wind_gust'];
-    if (json['weather'] != null) {
-      weather = <Weather>[];
-      json['weather'].forEach((v) {
-        weather!.add(new Weather.fromJson(v));
-      });
-    }
+    weather = <Weather>[];
+    json['weather'].forEach((v) {
+      weather.add(new Weather.fromJson(v));
+    });
   }
 
   Map<String, dynamic> toJson() {
@@ -119,7 +124,7 @@ class Current {
     data['wind_deg'] = this.windDeg;
     data['wind_gust'] = this.windGust;
     if (this.weather != null) {
-      data['weather'] = this.weather!.map((v) => v.toJson()).toList();
+      data['weather'] = this.weather.map((v) => v.toJson()).toList();
     }
     return data;
   }

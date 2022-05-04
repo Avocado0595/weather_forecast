@@ -20,3 +20,6 @@ call lat,lon: https://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&app
 call 7day: https://api.openweathermap.org/data/2.5/onecall?lat=37.1289771&lon=-84.0832646&exclude=hourly,minutely&appid=e358abeeb6acddcd484cba258580f713
 
 call directly: https://api.openweathermap.org/data/2.5/weather?q=London&appid=e358abeeb6acddcd484cba258580f713
+
+
+** TODO: fix the app to use the api call to get the weather data: enter invalid city
