@@ -64,7 +64,7 @@ class Current {
   num? uvi;
   int? clouds;
   int? visibility;
-  num? windSpeed;
+  double? windSpeed;
   int? windDeg;
   num? windGust;
   late List<Weather> weather;
@@ -167,7 +167,7 @@ class Daily {
   int? pressure;
   int? humidity;
   num? dewPoint;
-  num? windSpeed;
+  double? windSpeed;
   int? windDeg;
   num? windGust;
   List<Weather>? weather;

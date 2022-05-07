@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_icons/weather_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ForecastUtil {
   static String myKey = 'e358abeeb6acddcd484cba258580f713';
@@ -9,23 +9,34 @@ class ForecastUtil {
     return new DateFormat("EEE, MMM d, yyyy").format(dateTime);
   }
 
-  static Widget getWeatherIcon(String weather) {
-    final double size = 80;
+  static String getDayFromDate(DateTime dateTime) {
+    return new DateFormat("EEE").format(dateTime);
+  }
+
+  static double getMeterPerHour(double mps) {
+    // 1 meter/ 1 second = 1 /1000 km / 1/3600hour = 3600/1000 = 3.6
+    return 3.6 * mps;
+  }
+
+  static Widget getWeatherIcon(String weather, double size) {
     switch (weather.toLowerCase()) {
       case 'clouds':
         return Icon(
-          Icons.cloud,
-          size: 10,
+          FontAwesomeIcons.cloud,
+          color: Colors.lightBlueAccent,
+          size: size,
         );
       case 'rain':
-        return Icon(Icons.water_drop, size: size);
+        return Icon(FontAwesomeIcons.cloudRain,
+            color: Colors.lightBlueAccent, size: size);
       case 'sunny':
       case 'clear':
-        return Icon(Icons.sunny, size: size);
+        return Icon(FontAwesomeIcons.sun, color: Colors.amber[900], size: size);
       case 'haze':
-        return Icon(Icons.area_chart_sharp, size: size);
+        return Icon(FontAwesomeIcons.smog, color: Colors.grey[400], size: size);
       default:
-        return Icon(Icons.question_mark, size: size);
+        return Icon(FontAwesomeIcons.question,
+            color: Colors.red[500], size: size);
     }
   }
 
