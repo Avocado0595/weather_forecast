@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,11 +7,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ForecastUtil {
   static String myKey = 'e358abeeb6acddcd484cba258580f713';
   static String getFromattedDate(DateTime dateTime) {
-    return new DateFormat("EEE, MMM d, yyyy").format(dateTime);
+    return DateFormat("EEE, MMM d, yyyy").format(dateTime);
   }
 
   static String getDayFromDate(DateTime dateTime) {
-    return new DateFormat("EEE").format(dateTime);
+    return DateFormat("EEE").format(dateTime);
   }
 
   static double getMeterPerHour(double mps) {

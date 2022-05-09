@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this, prefer_initializing_formals
+
 class WeatherForecastModel {
   num? lat;
   num? lon;
@@ -27,11 +29,11 @@ class WeatherForecastModel {
     timezone = json['timezone'];
     timezoneOffset = json['timezone_offset'];
     current =
-        json['current'] != null ? new Current.fromJson(json['current']) : null;
+        json['current'] != null ? Current.fromJson(json['current']) : null;
     if (json['daily'] != null) {
       daily = <Daily>[];
       json['daily'].forEach((v) {
-        daily!.add(new Daily.fromJson(v));
+        daily!.add(Daily.fromJson(v));
       });
     }
   }

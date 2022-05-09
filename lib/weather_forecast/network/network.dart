@@ -14,22 +14,26 @@ class NetWork {
     num? lon = 0;
     String? city = cityName;
     String? country = '';
-    locationOject = LocationNetWork().getCoordinate(cityName: cityName);
-    await locationOject.then((location) {
-      lat = location.lat;
-      lon = location.lon;
-      city = location.name;
-      country = location.country;
-    });
+    try {
+      locationOject = LocationNetWork().getCoordinate(cityName: cityName);
+
+      await locationOject.then((location) {
+        lat = location.lat;
+        lon = location.lon;
+        city = location.name;
+        country = location.country;
+      });
+    } catch (e) {
+      return Future.error(e);
+    }
     var finalUrl =
         'https://api.openweathermap.org/data/2.5/onecall?lat=$lat&lon=$lon&exclude=hourly,minutely&appid=${ForecastUtil.myKey}';
     var response = await get(Uri.parse(finalUrl));
-    //print(response);
     if (response.statusCode == 200) {
       return WeatherForecastModel.fromJson(
           json.decode(response.body), city, country);
     } else {
-      throw Exception('error get weather');
+      return Future.error('cannot get weather');
     }
   }
 }
